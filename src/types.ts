@@ -1,8 +1,8 @@
-import { z } from "zod"
+import { z } from "zod";
 
 export interface ReviewRequest {
-  initialResearch: string
-  mode?: "normal" | "strict"
+  initialResearch: string;
+  mode?: "normal" | "strict";
 }
 
 export const CodexReviewResultSchema = z.object({
@@ -10,7 +10,7 @@ export const CodexReviewResultSchema = z.object({
   missing_dependencies: z.array(z.string()),
   security_risks: z.array(z.string()),
   alternative_strategies: z.array(z.string()),
-  confidence_score: z.number().int().min(0).max(100)
-})
+  confidence_score: z.number().int().min(0).max(100),
+});
 
-export type CodexReviewResult = z.infer<typeof CodexReviewResultSchema>
+export type CodexReviewResult = z.infer<typeof CodexReviewResultSchema>;

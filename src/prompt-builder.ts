@@ -18,5 +18,5 @@ ${strict ? `- Strict mode: actively look for failure points, security gaps, and 
 
 <research>
 ${research}
-</research>`
+</research>`;
 }
