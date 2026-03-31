@@ -2,7 +2,11 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import pino from "pino";
 import { z } from "zod";
-import { runCodexCLI, extractAgentMessage } from "./codex-runner.js";
+import {
+  runCodexCLI,
+  extractAgentMessage,
+  extractJSON,
+} from "./codex-runner.js";
 import { buildPrompt } from "./prompt-builder.js";
 import { CodexReviewResultSchema } from "./types.js";
 
@@ -52,8 +56,9 @@ server.registerTool(
         "Agent message extracted",
       );
 
+      const jsonStr = extractJSON(agentMessage);
       const parsed = CodexReviewResultSchema.safeParse(
-        JSON.parse(agentMessage),
+        JSON.parse(jsonStr),
       );
       if (!parsed.success) {
         logger.warn(
